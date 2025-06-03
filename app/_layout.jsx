@@ -32,10 +32,11 @@ export default function Layout() {
           }} />
         <Stack.Screen
           name="recipe/[id]"
-          options={{
-            headerTitle: "Loading recipe...",
+          options={({ route }) => ({
+            headerTitle: route.params?.title || "Recipe",
             headerLeft: () => <BackButton />
-          }} />
+          })}
+        />
         <Stack.Screen
           name="recipes"
           options={{

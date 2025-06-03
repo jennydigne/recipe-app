@@ -1,10 +1,8 @@
 import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../../components/Button';
-import { useRouter } from 'expo-router';
-import { useNavigation } from 'expo-router';
+import { fetchRecipeById, deleteRecipe } from '../../firebaseRecipes';
 
 export default function RecipeDetail() {
     const { id } = useLocalSearchParams();
@@ -12,6 +10,22 @@ export default function RecipeDetail() {
 
     const router = useRouter();
     const navigation = useNavigation();
+
+    useEffect(() => {
+        const loadRecipe = async () => {
+            try {
+                const result = await fetchRecipeById(id);
+                setRecipe(result);
+                if (result) {
+                    navigation.setOptions({ title: result.title });
+                }
+            } catch (error) {
+                console.log("Error loading recipe:", error);
+            }
+        };
+
+        loadRecipe();
+    }, [id]);
 
     const handleDelete = () => {
         Alert.alert("Delete recipe", "Are you sure?", [
@@ -21,10 +35,7 @@ export default function RecipeDetail() {
                 style: "destructive",
                 onPress: async () => {
                     try {
-                        const stored = await AsyncStorage.getItem('recipes');
-                        const parsed = stored ? JSON.parse(stored) : [];
-                        const updated = parsed.filter((item) => item.id !== id);
-                        await AsyncStorage.setItem('recipes', JSON.stringify(updated));
+                        await deleteRecipe(id);
                         router.back();
                     } catch (error) {
                         console.log("Error deleting recipe:", error);
@@ -33,26 +44,6 @@ export default function RecipeDetail() {
             }
         ]);
     };
-
-    useEffect(() => {
-        const loadRecipe = async () => {
-            try {
-                const stored = await AsyncStorage.getItem('recipes');
-                const parsed = stored ? JSON.parse(stored) : [];
-                const found = parsed.find((item) => item.id === id);
-                setRecipe(found);
-
-                if (found) {
-                    navigation.setOptions({ headerTitle: found.title });
-                }
-
-            } catch (error) {
-                console.log("Error loading recipe:", error);
-            }
-        };
-
-        loadRecipe();
-    }, [id]);
 
     if (!recipe) {
         return (

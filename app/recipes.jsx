@@ -1,8 +1,8 @@
 import { View, Text, TextInput, FlatList, Pressable, StyleSheet } from 'react-native';
 import { useState, useEffect, useCallback } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
+import { fetchAllRecipes } from '../firebaseRecipes';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -12,14 +12,16 @@ export default function Recipes() {
 
     useFocusEffect(
         useCallback(() => {
-            const loadRecipes = async () => {
-                const stored = await AsyncStorage.getItem('recipes');
-                const parsed = stored ? JSON.parse(stored) : [];
-                setRecipes(parsed);
-                setFiltered(parsed);
+            const load = async () => {
+                try {
+                    const result = await fetchAllRecipes();
+                    setRecipes(result);
+                    setFiltered(result);
+                } catch (error) {
+                    console.error("Failed to fetch recipes:", error);
+                }
             };
-            loadRecipes();
-
+            load();
         }, [])
     );
 
@@ -27,9 +29,9 @@ export default function Recipes() {
         const query = searchQuery.toLowerCase().trim();
 
         const result = recipes.filter(recipe => {
-            const titleMatch = recipe.title.toLowerCase().includes(query);
-            const ingredientsMatch = recipe.ingredients.join(', ').toLowerCase().includes(query);
-            const timeMatch = recipe.cookingTime.toString().includes(query);
+            const titleMatch = recipe.title?.toLowerCase().includes(query);
+            const ingredientsMatch = (recipe.ingredients || []).join(', ').toLowerCase().includes(query);
+            const timeMatch = (recipe.cookingTime ?? '').toString().includes(query);
 
             return titleMatch || ingredientsMatch || timeMatch;
         });
@@ -50,7 +52,10 @@ export default function Recipes() {
                 data={filtered}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                    <Pressable style={styles.item} onPress={() => router.push(`/recipe/${item.id}`)}>
+                    <Pressable style={styles.item} onPress={() => router.push({
+                        pathname: `/recipe/${item.id}`,
+                        params: { title: item.title }
+                    })}>
                         <Text style={styles.itemTitle}>{item.title}</Text>
                         <Text style={styles.itemInfo}>{item.cookingTime} min</Text>
                     </Pressable>
@@ -73,7 +78,6 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         padding: 10,
         marginBottom: 16,
-        backgroundColor: "white"
     },
     item: {
         padding: 12,

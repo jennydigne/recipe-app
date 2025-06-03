@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, TextInput, Alert, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useRouter } from 'expo-router';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import Button from '../components/Button';
 import { useState } from 'react';
+import { saveRecipe } from '../firebaseRecipes';
+
 
 export default function AddRecipe() {
     const [title, setTitle] = useState("");
@@ -19,7 +20,6 @@ export default function AddRecipe() {
         }
 
         const newRecipe = {
-            id: Date.now().toString(),
             title,
             ingredients: ingredients
                 .split("\n")
@@ -33,17 +33,13 @@ export default function AddRecipe() {
         };
 
         try {
-            const existing = await AsyncStorage.getItem('recipes');
-            const recipes = existing ? JSON.parse(existing) : [];
-            recipes.push(newRecipe);
-            await AsyncStorage.setItem('recipes', JSON.stringify(recipes));
+            await saveRecipe(newRecipe);
             Alert.alert("Recipe saved!");
             router.back();
         } catch (error) {
             Alert.alert("Error saving");
             console.log(error);
         }
-
     }
 
     return (
@@ -108,7 +104,6 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 5,
         marginTop: 5,
-        backgroundColor: "white"
     },
     multilineInput: {
         height: 100,
