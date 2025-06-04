@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import BackButton from '../components/BackButton';
+import CloseButton from '../components/CloseButton';
 
 export default function Layout() {
   return (
@@ -14,7 +14,9 @@ export default function Layout() {
         headerStyle: {
           backgroundColor: "#C5EFCB",
         },
-        headerBackVisible: false
+        headerBackButtonDisplayMode: "minimal",
+        headerTintColor: "black",
+        headerBackVisible: true,
       }}>
         <Stack.Screen
           name="index"
@@ -27,21 +29,20 @@ export default function Layout() {
         <Stack.Screen
           name="add"
           options={{
-            headerTitle: "Add new recipe",
-            headerLeft: () => <BackButton />
+            headerTitle: "Add new recipe"
           }} />
         <Stack.Screen
           name="recipe/[id]"
           options={({ route }) => ({
             headerTitle: route.params?.title || "Recipe",
-            headerLeft: () => <BackButton />
+            headerBackVisible: false,
+            headerRight: () => <CloseButton />
           })}
         />
         <Stack.Screen
           name="recipes"
           options={{
-            headerTitle: "Recipe collection",
-            headerLeft: () => <BackButton />
+            headerTitle: "Recipe collection"
           }} />
       </Stack>
     </SafeAreaProvider>
