@@ -31,18 +31,15 @@ const Dropdown = ({ options, selected, setSelected }) => {
 
             {open && (
                 <View style={styles.dropdownList}>
-                    <FlatList
-                        data={options}
-                        keyExtractor={(item) => item}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity
-                                style={styles.dropdownItem}
-                                onPress={() => handleSelect(item)}
-                            >
-                                <Text style={styles.itemText}>{item}</Text>
-                            </TouchableOpacity>
-                        )}
-                    />
+                    {options.map((option, index) => (
+                        <TouchableOpacity
+                            key={index}
+                            style={styles.dropdownItem}
+                            onPress={() => handleSelect(option)}
+                        >
+                            <Text style={styles.itemText}>{option}</Text>
+                        </TouchableOpacity>
+                    ))}
                 </View>
             )}
         </View>

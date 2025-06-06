@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, TextInput, Alert, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import Button from '../components/Button';
 import { useState } from 'react';
 import { saveRecipe } from '../firebaseRecipes';
 import Dropdown from '../components/DropDown';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function AddRecipe() {
     const [title, setTitle] = useState("");
@@ -46,63 +47,56 @@ export default function AddRecipe() {
     }
 
     return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                keyboardVerticalOffset={60}
-                style={styles.container}>
-                <Text style={styles.label}>Title</Text>
-                <TextInput
-                    style={styles.input}
-                    value={title}
-                    onChangeText={setTitle}
-                    placeholder="Enter recipe title"
-                />
-                <Text style={styles.categoryLabel}>Category</Text>
-                <Dropdown
-                    options={categoryOptions}
-                    selected={category}
-                    setSelected={setCategory}
-                />
-                <Text style={styles.label}>Cooking time</Text>
-                <TextInput
-                    style={styles.input}
-                    value={cookingTime}
-                    onChangeText={setCookingTime}
-                    placeholder="Enter cooking time in minutes"
-                    keyboardType='numeric'
-                />
-                <Text style={styles.label}>Ingredients</Text>
-                <TextInput
-                    style={[styles.input, styles.multilineInput]}
-                    value={ingredients}
-                    onChangeText={setIngredients}
-                    placeholder="Add an ingredient and press return"
-                    multiline
-                />
-                <Text style={styles.label}>Instructions</Text>
-                <TextInput
-                    style={[styles.input, styles.multilineInput]}
-                    value={instructions}
-                    onChangeText={setInstructions}
-                    placeholder="Add an instruction step and press return"
-                    multiline
-                />
-                <View style={styles.buttonContainer}>
-                    <Button title="Save recipe" onPress={handleSave} />
-                </View>
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+        <KeyboardAwareScrollView
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+            style={styles.scrollView}
+        >
+            <Text style={styles.label}>Title</Text>
+            <TextInput
+                style={styles.input}
+                value={title}
+                onChangeText={setTitle}
+                placeholder="Enter recipe title"
+            />
+            <Text style={styles.categoryLabel}>Category</Text>
+            <Dropdown
+                options={categoryOptions}
+                selected={category}
+                setSelected={setCategory}
+            />
+            <Text style={styles.label}>Cooking time</Text>
+            <TextInput
+                style={styles.input}
+                value={cookingTime}
+                onChangeText={setCookingTime}
+                placeholder="Enter cooking time in minutes"
+                keyboardType='numeric'
+            />
+            <Text style={styles.label}>Ingredients</Text>
+            <TextInput
+                style={[styles.input, styles.multilineInput]}
+                value={ingredients}
+                onChangeText={setIngredients}
+                placeholder="Add an ingredient and press return"
+                multiline
+            />
+            <Text style={styles.label}>Instructions</Text>
+            <TextInput
+                style={[styles.input, styles.multilineInput]}
+                value={instructions}
+                onChangeText={setInstructions}
+                placeholder="Add an instruction step and press return"
+                multiline
+            />
+            <View style={styles.buttonContainer}>
+                <Button title="Save recipe" onPress={handleSave} />
+            </View>
+        </KeyboardAwareScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: "white",
-        justifyContent: "center",
-        paddingHorizontal: 20
-    },
     label: {
         fontWeight: "bold",
         marginTop: 10
@@ -127,4 +121,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignSelf: "flex-start"
     },
+    scrollContent: {
+        padding: 20,
+        paddingBottom: 40,
+        backgroundColor: "white"
+    },
+    scrollView: {
+        backgroundColor: "white"
+    }
 })
