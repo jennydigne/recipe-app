@@ -1,14 +1,12 @@
-import { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { useRef } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const Dropdown = ({ options, selected, setSelected }) => {
-    const [open, setOpen] = useState(false);
+const Dropdown = ({ options, selected, setSelected, isOpen, toggleOpen }) => {
     const dropdownRef = useRef(null);
 
     const handleSelect = (option) => {
         setSelected(option);
-        setOpen(false);
     };
 
     return (
@@ -16,20 +14,20 @@ const Dropdown = ({ options, selected, setSelected }) => {
             <TouchableOpacity
                 style={[
                     styles.dropdown,
-                    open ? styles.dropdownOpen : styles.dropdownClosed
+                    isOpen ? styles.dropdownOpen : styles.dropdownClosed
                 ]}
-                onPress={() => setOpen(!open)}
+                onPress={toggleOpen}
                 ref={dropdownRef}
             >
                 <View style={styles.dropdownContent}>
                     <Text style={styles.dropdownText}>
-                        {selected ? selected : 'Select a category'}
+                        {selected ? selected : 'Select an option'}
                     </Text>
-                    <Feather name={open ? 'chevron-up' : 'chevron-down'} size={20} color="#333" />
+                    <Feather name={isOpen ? 'chevron-up' : 'chevron-down'} size={20} color="#333" />
                 </View>
             </TouchableOpacity>
 
-            {open && (
+            {isOpen && (
                 <View style={styles.dropdownList}>
                     {options.map((option, index) => (
                         <TouchableOpacity
@@ -49,7 +47,6 @@ const Dropdown = ({ options, selected, setSelected }) => {
 const styles = StyleSheet.create({
     wrapper: {
         position: 'relative',
-        zIndex: 999,
     },
     dropdown: {
         height: 40,
@@ -74,11 +71,12 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
         maxHeight: 203,
-        paddingVertical: 8
+        paddingVertical: 8,
+        zIndex: 999,
+        elevation: 10, 
     },
     dropdownItem: {
-        paddingVertical: 10,
-        paddingHorizontal: 16,
+        padding: 10
     },
     itemText: {
         fontSize: 14,
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 5,
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
-        borderBottomWidth: 0
+        borderBottomWidth: 0,
     },
     dropdownContent: {
         flexDirection: 'row',
@@ -101,3 +99,4 @@ const styles = StyleSheet.create({
 });
 
 export default Dropdown;
+

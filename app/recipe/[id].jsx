@@ -3,6 +3,7 @@ import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import { fetchRecipeById, deleteRecipe } from '../../firebaseRecipes';
+import Feather from '@expo/vector-icons/Feather';
 
 export default function RecipeDetail() {
     const { id } = useLocalSearchParams();
@@ -56,7 +57,18 @@ export default function RecipeDetail() {
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>{recipe.title}</Text>
-            <Text style={styles.item}>{recipe.cookingTime} minutes</Text>
+            <View style={styles.metaRow}>
+                <View style={styles.metaItem}>
+                    <Feather name="clock" size={16} color="gray" />
+                    <Text style={styles.metaText}>{recipe.cookingTime}</Text>
+                </View>
+                {recipe.category && (
+                    <View style={styles.metaItem}>
+                        <Feather name="tag" size={16} color="gray" />
+                        <Text style={styles.metaText}>{recipe.category}</Text>
+                    </View>
+                )}
+            </View>
             <Text style={styles.sectionTitle}>Ingredients</Text>
             {recipe.ingredients.map((item, index) => (
                 <Text key={index} style={styles.item}>• {item}</Text>
@@ -97,6 +109,21 @@ const styles = StyleSheet.create({
     buttonContainer: {
         marginVertical: 20,
         alignSelf: "flex-start"
+    },
+    metaRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    metaItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 10
+    },
+    metaText: {
+        fontSize: 14,
+        color: 'gray',
+        marginLeft: 4
     }
 });
 

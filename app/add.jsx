@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Alert, Platform } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import Button from '../components/Button';
 import { useState } from 'react';
@@ -10,9 +10,11 @@ export default function AddRecipe() {
     const [title, setTitle] = useState("");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState("");
-    const [cookingTime, setCookingTime] = useState("");
+    const [cookingTime, setCookingTime] = useState(null);
     const [category, setCategory] = useState(null);
+    const [activeDropdown, setActiveDropdown] = useState(null);
     const categoryOptions = ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack'];
+    const cookingTimeOptions = ['< 15 min', '< 30 min', '< 45 min', '< 60 min', '> 60 min']
 
     const router = useRouter();
 
@@ -25,7 +27,7 @@ export default function AddRecipe() {
         const newRecipe = {
             title,
             category,
-            cookingTime: parseInt(cookingTime),
+            cookingTime,
             ingredients: ingredients
                 .split("\n")
                 .map(line => line.trim())
@@ -59,19 +61,31 @@ export default function AddRecipe() {
                 onChangeText={setTitle}
                 placeholder="Enter recipe title"
             />
-            <Text style={styles.categoryLabel}>Category</Text>
+            <Text style={styles.menuLabel}>Category</Text>
             <Dropdown
                 options={categoryOptions}
                 selected={category}
-                setSelected={setCategory}
+                setSelected={(value) => {
+                    setCategory(value);
+                    setActiveDropdown(null);
+                }}
+                isOpen={activeDropdown === 'category'}
+                toggleOpen={() =>
+                    setActiveDropdown(activeDropdown === 'category' ? null : 'category')
+                }
             />
-            <Text style={styles.label}>Cooking time</Text>
-            <TextInput
-                style={styles.input}
-                value={cookingTime}
-                onChangeText={setCookingTime}
-                placeholder="Enter cooking time in minutes"
-                keyboardType='numeric'
+            <Text style={styles.menuLabel}>Cooking time</Text>
+            <Dropdown
+                options={cookingTimeOptions}
+                selected={cookingTime}
+                setSelected={(value) => {
+                    setCookingTime(value);
+                    setActiveDropdown(null);
+                }}
+                isOpen={activeDropdown === 'cookingTime'}
+                toggleOpen={() =>
+                    setActiveDropdown(activeDropdown === 'cookingTime' ? null : 'cookingTime')
+                }
             />
             <Text style={styles.label}>Ingredients</Text>
             <TextInput
@@ -101,7 +115,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 10
     },
-    categoryLabel: {
+    menuLabel: {
         fontWeight: "bold",
         marginTop: 10,
         marginBottom: 5
@@ -124,7 +138,6 @@ const styles = StyleSheet.create({
     scrollContent: {
         padding: 20,
         paddingBottom: 40,
-        backgroundColor: "white"
     },
     scrollView: {
         backgroundColor: "white"

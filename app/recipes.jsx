@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { fetchAllRecipes } from '../firebaseRecipes';
+import Feather from '@expo/vector-icons/Feather';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -31,9 +32,10 @@ export default function Recipes() {
         const result = recipes.filter(recipe => {
             const titleMatch = recipe.title?.toLowerCase().includes(query);
             const ingredientsMatch = (recipe.ingredients || []).join(', ').toLowerCase().includes(query);
-            const timeMatch = (recipe.cookingTime ?? '').toString().includes(query);
+            const categoryMatch = (recipe.category ?? '').toLowerCase().includes(query);
+            const timeMatch = (recipe.cookingTime ?? '').toLowerCase().includes(query);
 
-            return titleMatch || ingredientsMatch || timeMatch;
+            return titleMatch || ingredientsMatch || timeMatch || categoryMatch;
         });
 
         setFiltered(result);
@@ -42,12 +44,11 @@ export default function Recipes() {
     return (
         <View style={styles.container}>
             <TextInput
-                placeholder="Search by title, ingredients or cooking time..."
+                placeholder="Search by title, ingredients, category or cooking time..."
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 style={styles.input}
             />
-
             <FlatList
                 data={filtered}
                 keyExtractor={item => item.id}
@@ -57,7 +58,18 @@ export default function Recipes() {
                         params: { title: item.title }
                     })}>
                         <Text style={styles.itemTitle}>{item.title}</Text>
-                        <Text style={styles.itemInfo}>{item.cookingTime} min</Text>
+                        <View style={styles.metaRow}>
+                            <View style={styles.metaItem}>
+                                <Feather name="clock" size={16} color="gray" style={{ marginRight: 4 }} />
+                                <Text style={styles.itemInfo}>{item.cookingTime}</Text>
+                            </View>
+                            {item.category && (
+                                <View style={styles.metaItem}>
+                                    <Feather name="tag" size={16} color="gray" style={{ marginRight: 4 }} />
+                                    <Text style={styles.itemInfo}>{item.category}</Text>
+                                </View>
+                            )}
+                        </View>
                     </Pressable>
                 )}
                 ListEmptyComponent={<Text style={styles.emptyList}>No search results</Text>}
@@ -95,5 +107,15 @@ const styles = StyleSheet.create({
     },
     emptyList: {
         marginTop: 20
-    }
+    },
+    metaRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
+    },
+    metaItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginRight: 10
+    },
 });
