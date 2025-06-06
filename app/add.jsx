@@ -3,13 +3,15 @@ import { useRouter } from 'expo-router';
 import Button from '../components/Button';
 import { useState } from 'react';
 import { saveRecipe } from '../firebaseRecipes';
-
+import Dropdown from '../components/DropDown';
 
 export default function AddRecipe() {
     const [title, setTitle] = useState("");
     const [ingredients, setIngredients] = useState("");
     const [instructions, setInstructions] = useState("");
     const [cookingTime, setCookingTime] = useState("");
+    const [category, setCategory] = useState(null);
+    const categoryOptions = ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snack'];
 
     const router = useRouter();
 
@@ -21,6 +23,8 @@ export default function AddRecipe() {
 
         const newRecipe = {
             title,
+            category,
+            cookingTime: parseInt(cookingTime),
             ingredients: ingredients
                 .split("\n")
                 .map(line => line.trim())
@@ -29,7 +33,6 @@ export default function AddRecipe() {
                 .split("\n")
                 .map(line => line.trim())
                 .filter(line => line !== ""),
-            cookingTime: parseInt(cookingTime)
         };
 
         try {
@@ -55,6 +58,12 @@ export default function AddRecipe() {
                     onChangeText={setTitle}
                     placeholder="Enter recipe title"
                 />
+                <Text style={styles.categoryLabel}>Category</Text>
+                <Dropdown
+                    options={categoryOptions}
+                    selected={category}
+                    setSelected={setCategory}
+                />
                 <Text style={styles.label}>Cooking time</Text>
                 <TextInput
                     style={styles.input}
@@ -68,7 +77,7 @@ export default function AddRecipe() {
                     style={[styles.input, styles.multilineInput]}
                     value={ingredients}
                     onChangeText={setIngredients}
-                    placeholder="Add one ingredient per line"
+                    placeholder="Add an ingredient and press return"
                     multiline
                 />
                 <Text style={styles.label}>Instructions</Text>
@@ -76,7 +85,7 @@ export default function AddRecipe() {
                     style={[styles.input, styles.multilineInput]}
                     value={instructions}
                     onChangeText={setInstructions}
-                    placeholder="Add one instruction step per line"
+                    placeholder="Add an instruction step and press return"
                     multiline
                 />
                 <View style={styles.buttonContainer}>
@@ -98,6 +107,11 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 10
     },
+    categoryLabel: {
+        fontWeight: "bold",
+        marginTop: 10,
+        marginBottom: 5
+    },
     input: {
         borderWidth: 1,
         borderColor: "gray",
@@ -107,10 +121,10 @@ const styles = StyleSheet.create({
     },
     multilineInput: {
         height: 100,
-        textAlignVertical: 'top'
+        textAlignVertical: "top"
     },
     buttonContainer: {
         marginTop: 20,
         alignSelf: "flex-start"
-    }
+    },
 })
