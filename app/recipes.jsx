@@ -54,7 +54,7 @@ export default function Recipes() {
                 data={filtered}
                 keyExtractor={item => item.id}
                 renderItem={({ item }) => (
-                    <Pressable style={styles.item} onPress={() => router.push({
+                    <Pressable style={styles.item} onPress={() => router.replace({
                         pathname: `/recipe/${item.id}`,
                         params: { title: item.title }
                     })}>

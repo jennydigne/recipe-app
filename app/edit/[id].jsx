@@ -30,7 +30,7 @@ export default function AddRecipe() {
                     setIngredients(recipeToEdit.ingredients.join('\n'));
                     setInstructions(recipeToEdit.instructions.join('\n'));
                 } else {
-                    console.warn("Recipe not found in database");
+                    console.warn("Recipe not found");
                 }
             } catch (error) {
                 console.log("Error fetching:", error);
@@ -61,9 +61,9 @@ export default function AddRecipe() {
         };
 
         try {
-            await updateRecipe(id, updatedRecipe); 
+            await updateRecipe(id, updatedRecipe);
             Alert.alert("Recipe updated!");
-            router.back();
+            router.replace('/');
         } catch (error) {
             Alert.alert("Error updating recipe");
             console.log(error);

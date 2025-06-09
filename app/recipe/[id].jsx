@@ -55,34 +55,37 @@ export default function RecipeDetail() {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <Text style={styles.title}>{recipe.title}</Text>
-            <View style={styles.metaRow}>
-                <View style={styles.metaItem}>
-                    <Feather name="clock" size={16} color="gray" />
-                    <Text style={styles.metaText}>{recipe.cookingTime}</Text>
-                </View>
-                {recipe.category && (
+        <View style={styles.container}>
+            <ScrollView
+                contentContainerStyle={styles.content}>
+                <Text style={styles.title}>{recipe.title}</Text>
+                <View style={styles.metaRow}>
                     <View style={styles.metaItem}>
-                        <Feather name="tag" size={16} color="gray" />
-                        <Text style={styles.metaText}>{recipe.category}</Text>
+                        <Feather name="clock" size={16} color="gray" />
+                        <Text style={styles.metaText}>{recipe.cookingTime}</Text>
                     </View>
-                )}
-            </View>
-            <Text style={styles.sectionTitle}>Ingredients</Text>
-            {recipe.ingredients.map((item, index) => (
-                <Text key={index} style={styles.item}>• {item}</Text>
-            ))}
+                    {recipe.category && (
+                        <View style={styles.metaItem}>
+                            <Feather name="tag" size={16} color="gray" />
+                            <Text style={styles.metaText}>{recipe.category}</Text>
+                        </View>
+                    )}
+                </View>
+                <Text style={styles.sectionTitle}>Ingredients</Text>
+                {recipe.ingredients.map((item, index) => (
+                    <Text key={index} style={styles.item}>• {item}</Text>
+                ))}
 
-            <Text style={styles.sectionTitle}>Instructions</Text>
-            {recipe.instructions.map((item, index) => (
-                <Text key={index} style={styles.item}>{index + 1}. {item}</Text>
-            ))}
+                <Text style={styles.sectionTitle}>Instructions</Text>
+                {recipe.instructions.map((item, index) => (
+                    <Text key={index} style={styles.item}>{index + 1}. {item}</Text>
+                ))}
+            </ScrollView>
             <View style={styles.buttonContainer}>
-                <Button title="Edit recipe" onPress={() => router.push(`/edit/${id}`)} />
-                <Button title="Delete recipe" onPress={handleDelete} />
+                <Button title="Edit" onPress={() => router.push(`/edit/${id}`)} />
+                <View style={styles.button}><Button title="Delete" onPress={handleDelete} /></View>
             </View>
-        </ScrollView>
+        </View>
     );
 }
 
@@ -90,7 +93,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "white",
-        padding: 20,
+        justifyContent: "space-between"
+    },
+    content: {
+        paddingBottom: 40,
+        padding: 20
     },
     title: {
         fontSize: 20,
@@ -108,9 +115,11 @@ const styles = StyleSheet.create({
         marginBottom: 4,
     },
     buttonContainer: {
-        marginVertical: 20,
+        padding: 20,
         flexDirection: "row",
-        justifyContent: "space-between"
+    },
+    button: {
+        marginLeft: 20
     },
     metaRow: {
         flexDirection: 'row',

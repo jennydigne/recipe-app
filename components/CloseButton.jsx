@@ -6,7 +6,7 @@ export default function CloseButton() {
     const router = useRouter();
 
     return (
-        <TouchableOpacity onPress={() => router.back()}>
+        <TouchableOpacity onPress={() => router.replace("/recipes")}>
             <Feather name="x" size={24} color="black" />
         </TouchableOpacity>
     );
