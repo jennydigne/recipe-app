@@ -79,6 +79,7 @@ export default function RecipeDetail() {
                 <Text key={index} style={styles.item}>{index + 1}. {item}</Text>
             ))}
             <View style={styles.buttonContainer}>
+                <Button title="Edit recipe" onPress={() => router.push(`/edit/${id}`)} />
                 <Button title="Delete recipe" onPress={handleDelete} />
             </View>
         </ScrollView>
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginVertical: 20,
-        alignSelf: "flex-start"
+        flexDirection: "row",
+        justifyContent: "space-between"
     },
     metaRow: {
         flexDirection: 'row',

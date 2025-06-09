@@ -1,5 +1,5 @@
 import { db } from './firebaseConfig';
-import { collection, addDoc, getDocs, getDoc, doc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, getDoc, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 
 const collectionRef = collection(db, 'recipes');
 
@@ -42,5 +42,16 @@ export const deleteRecipe = async (id) => {
     console.log('Recipe deleted');
   } catch (error) {
     console.error('Error deleting recipe:', error);
+  }
+};
+
+export const updateRecipe = async (id, updatedData) => {
+  try {
+    const ref = doc(db, 'recipes', id);
+    await updateDoc(ref, updatedData);
+    console.log('Recipe updated in Firestore');
+  } catch (error) {
+    console.error('Error updating recipe:', error);
+    throw error;
   }
 };

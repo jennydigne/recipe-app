@@ -43,8 +43,9 @@ export default function Recipes() {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.searchLabel}>Search recipes</Text>
             <TextInput
-                placeholder="Search by title, ingredients, category or cooking time..."
+                placeholder="Title, ingredient, category or cooking time"
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 style={styles.input}
@@ -60,12 +61,12 @@ export default function Recipes() {
                         <Text style={styles.itemTitle}>{item.title}</Text>
                         <View style={styles.metaRow}>
                             <View style={styles.metaItem}>
-                                <Feather name="clock" size={16} color="gray" style={{ marginRight: 4 }} />
+                                <Feather name="clock" size={16} color="gray" />
                                 <Text style={styles.itemInfo}>{item.cookingTime}</Text>
                             </View>
                             {item.category && (
                                 <View style={styles.metaItem}>
-                                    <Feather name="tag" size={16} color="gray" style={{ marginRight: 4 }} />
+                                    <Feather name="tag" size={16} color="gray" />
                                     <Text style={styles.itemInfo}>{item.category}</Text>
                                 </View>
                             )}
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     itemInfo: {
         fontSize: 14,
         color: 'gray',
+        marginLeft: 4
     },
     emptyList: {
         marginTop: 20
@@ -118,4 +120,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10
     },
+    searchLabel: {
+        fontWeight: "bold",
+        fontSize: 16,
+        marginBottom: 5
+
+    }
 });
