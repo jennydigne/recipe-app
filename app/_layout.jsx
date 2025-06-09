@@ -14,6 +14,7 @@ export default function Layout() {
         headerStyle: {
           backgroundColor: "#C5EFCB",
         },
+        headerTitleAlign: "center",
         headerBackButtonDisplayMode: "minimal",
         headerTintColor: "black",
         headerBackVisible: true,
@@ -23,7 +24,7 @@ export default function Layout() {
           options={{
             headerTitle: "Recipe Manager",
             headerTitleStyle: {
-              fontSize: 20
+              fontSize: 20,
             }
           }} />
         <Stack.Screen

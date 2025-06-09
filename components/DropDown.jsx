@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
-        maxHeight: 203,
+        maxHeight: 210,
         paddingVertical: 8,
         zIndex: 999,
         elevation: 10, 
