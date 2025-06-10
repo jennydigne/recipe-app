@@ -9,6 +9,7 @@ export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filtered, setFiltered] = useState([]);
+    const [sortOption, setSortOption] = useState("newest");
     const router = useRouter();
 
     useFocusEffect(
@@ -38,18 +39,37 @@ export default function Recipes() {
             return titleMatch || ingredientsMatch || timeMatch || categoryMatch;
         });
 
+        result.sort((a, b) => {
+            if (sortOption === "a-z") return a.title.localeCompare(b.title);
+            if (sortOption === "z-a") return b.title.localeCompare(a.title);
+            return 0;
+        });
+
         setFiltered(result);
-    }, [searchQuery, recipes]);
+    }, [searchQuery, recipes, sortOption]);
 
     return (
         <View style={styles.container}>
-            <Text style={styles.searchLabel}>Search recipes</Text>
+            <Text style={styles.label}>Search recipes</Text>
             <TextInput
                 placeholder="Title, ingredient, category or cooking time"
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 style={styles.input}
             />
+            <Text style={styles.label}>Sort recipes</Text>
+            <View style={styles.sortContainer}>
+                <Pressable style={[styles.sortButton,
+                { borderWidth: sortOption === "a-z" ? 1 : 0 }]}
+                    onPress={() => setSortOption("a-z")}>
+                    <Text >A–Z</Text> 
+                </Pressable>
+                <Pressable style={[styles.sortButton,
+                { borderWidth: sortOption === "z-a" ? 1 : 0 }]}
+                    onPress={() => setSortOption("z-a")}>
+                    <Text>Z–A</Text>
+                </Pressable>
+            </View>
             <FlatList
                 data={filtered}
                 keyExtractor={item => item.id}
@@ -120,10 +140,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: 10
     },
-    searchLabel: {
+    label: {
         fontWeight: "bold",
         fontSize: 16,
         marginBottom: 5
-
+    },
+    sortContainer: {
+        flexDirection: 'row',
+        gap: 10,
+        marginBottom: 16,
+        flexWrap: 'wrap'
+    },
+    sortButton: {
+        backgroundColor: '#F2F2F2',
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderRadius: 5
     }
 });
