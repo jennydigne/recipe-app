@@ -126,7 +126,7 @@ export default function AddRecipe() {
                 multiline
             />
             <View style={styles.buttonContainer}>
-                <Button title="Save changes" onPress={handleUpdate} />
+                <Button title="Save changes" backgroundColor="#C5EFCB" textColor="#222222" borderColor="#06402B" borderWidth={1} onPress={handleUpdate} />
             </View>
         </KeyboardAwareScrollView>
     );

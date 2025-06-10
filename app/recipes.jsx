@@ -59,13 +59,11 @@ export default function Recipes() {
             />
             <Text style={styles.label}>Sort recipes</Text>
             <View style={styles.sortContainer}>
-                <Pressable style={[styles.sortButton,
-                { borderWidth: sortOption === "a-z" ? 1 : 0 }]}
+                <Pressable style={[styles.sortButton, sortOption === "a-z" && styles.sortButtonSelected]}
                     onPress={() => setSortOption("a-z")}>
-                    <Text >A–Z</Text> 
+                    <Text >A–Z</Text>
                 </Pressable>
-                <Pressable style={[styles.sortButton,
-                { borderWidth: sortOption === "z-a" ? 1 : 0 }]}
+                <Pressable style={[styles.sortButton, sortOption === "z-a" && styles.sortButtonSelected]}
                     onPress={() => setSortOption("z-a")}>
                     <Text>Z–A</Text>
                 </Pressable>
@@ -107,37 +105,37 @@ const styles = StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: "gray",
         borderRadius: 6,
         padding: 10,
         marginBottom: 16,
     },
     item: {
         padding: 12,
-        backgroundColor: '#f2f2f2',
+        backgroundColor: "#F2F2F2",
         borderRadius: 6,
         marginBottom: 10,
     },
     itemTitle: {
         fontSize: 16,
-        fontWeight: 'bold',
+        fontWeight: "bold",
     },
     itemInfo: {
         fontSize: 14,
-        color: 'gray',
+        color: "gray",
         marginLeft: 4
     },
     emptyList: {
         marginTop: 20
     },
     metaRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         marginTop: 10,
     },
     metaItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         marginRight: 10
     },
     label: {
@@ -146,15 +144,18 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     sortContainer: {
-        flexDirection: 'row',
+        flexDirection: "row",
         gap: 10,
         marginBottom: 16,
-        flexWrap: 'wrap'
+        flexWrap: "wrap"
     },
     sortButton: {
-        backgroundColor: '#F2F2F2',
+        backgroundColor: "#F2F2F2",
         paddingVertical: 5,
         paddingHorizontal: 10,
         borderRadius: 5
+    },
+    sortButtonSelected: {
+        backgroundColor: "#C5EFCB",
     }
 });
