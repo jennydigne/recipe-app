@@ -1,40 +1,62 @@
-import { TouchableOpacity, StyleSheet, Text } from "react-native";
+import { Pressable, Text, StyleSheet } from 'react-native';
 
-export default function Button({
-  title,
-  onPress,
-  backgroundColor = "#222",
-  textColor = "white",
-  borderColor,
-  borderWidth = 0
-}) {
+export default function Button({ onPress, title, variant = 'primary', style }) {
+  const variantStyles = {
+    primary: {
+      button: styles.primary,
+      text: styles.text_primary,
+    },
+    secondary: {
+      button: styles.secondary,
+      text: styles.text_secondary,
+    },
+    delete: {
+      button: styles.delete,
+      text: styles.text_delete,
+    },
+  };
+
+  const currentStyle = variantStyles[variant] || variantStyles.primary;
+
   return (
-    <TouchableOpacity
-      style={[
-        styles.button,
-        {
-          backgroundColor,
-          borderColor,
-          borderWidth
-        }
-      ]}
-      onPress={onPress}
-    >
-      <Text style={[styles.buttonText, { color: textColor }]}>{title}</Text>
-    </TouchableOpacity>
+    <Pressable onPress={onPress} style={[styles.buttonBase, currentStyle.button, style]}>
+      <Text style={[styles.textBase, currentStyle.text]}>{title}</Text>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-    button: {
-        paddingVertical: 10,
-        paddingHorizontal: 15,
-        borderRadius: 10,
-        alignItems: "center"
-    },
-    buttonText: {
-        fontSize: 16,
-        fontWeight: "500"
-    }
-})
+  buttonBase: {
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    borderWidth: 1,
+  },
+  textBase: {
+    fontWeight: '500',
+    fontSize: 16
+  },
+  primary: {
+    backgroundColor: '#C5EFCB',
+    borderColor: '#11A871'
+  },
+  text_primary: {
+    color: '#06402B',
+  },
+  secondary: {
+    backgroundColor: '#F2F2F2',
+    borderColor: '#8f8f8f',
+  },
+  text_secondary: {
+    color: '#222222',
+  },
+  delete: {
+    backgroundColor: '#F7C5D4',
+    borderColor: '#CF5B6C'
+  },
+  text_delete: {
+    color: '#851D2D',
+  },
+});
 

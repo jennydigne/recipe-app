@@ -82,8 +82,8 @@ export default function RecipeDetail() {
                 ))}
             </ScrollView>
             <View style={styles.buttonContainer}>
-                <Button title="Edit" backgroundColor="#C5EFCB" textColor="#06402B" borderColor="#06402B" borderWidth={1} onPress={() => router.push(`/edit/${id}`)} />
-                <View style={styles.button}><Button title="Delete" backgroundColor="#F7C5D4" textColor="#851D2D" borderColor="#851D2D" borderWidth={1} onPress={handleDelete} /></View>
+                <Button title="Edit" variant="primary" onPress={() => router.push(`/edit/${id}`)} />
+                <View style={styles.button}><Button title="Delete" variant="delete" onPress={handleDelete} /></View>
             </View>
         </View>
     );

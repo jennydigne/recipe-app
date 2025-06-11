@@ -157,5 +157,7 @@ const styles = StyleSheet.create({
     },
     sortButtonSelected: {
         backgroundColor: "#C5EFCB",
+        borderWidth: 1,
+        borderColor: "#11A871"
     }
 });

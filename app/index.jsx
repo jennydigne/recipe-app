@@ -11,8 +11,8 @@ export default function Home() {
             <Text style={styles.heading}>Recipe Manager <MaterialCommunityIcons name="silverware-fork-knife" size={24} color="black" /></Text>
             <Text style={styles.subHeading}>Create your own recipe collection with Recipe Manager</Text>
             <View style={styles.buttonContainer}>
-                <Button title="My recipes" backgroundColor="#F2F2F2" textColor="#222222" borderColor="#222222" borderWidth={1} onPress={() => router.push("/recipes")} />
-                <Button title="Add recipe" backgroundColor="#C5EFCB" textColor="#06402B" borderColor="#06402B" borderWidth={1} onPress={() => router.push("/add")} />
+                <Button title="My recipes" variant="secondary" onPress={() => router.push("/recipes")} />
+                <Button title="Add recipe" variant="primary" onPress={() => router.push("/add")} />
             </View>
         </View>
     );
