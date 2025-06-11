@@ -12,7 +12,7 @@ export default function Home() {
             <Text style={styles.subHeading}>Create your own recipe collection with Recipe Manager</Text>
             <View style={styles.buttonContainer}>
                 <Button title="My recipes" variant="secondary" onPress={() => router.push("/recipes")} />
-                <Button title="Add recipe" variant="primary" onPress={() => router.push("/add")} />
+                <Button title="Add recipe" variant="primary" style={styles.button} onPress={() => router.push("/add")} />
             </View>
         </View>
     );
@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
-        width: "70%"
+        justifyContent: "center",
     },
+    button: {
+        marginLeft: 15
+    }
 })
