@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     tagPreview: {
-        backgroundColor: '#C5EFCB',
+        backgroundColor: '#D1EDD5',
         paddingHorizontal: 6,
         paddingVertical: 3,
         borderRadius: 5,
@@ -164,8 +164,6 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     sortButtonSelected: {
-        backgroundColor: "#C5EFCB",
-        borderWidth: 1,
-        borderColor: "#11A871"
+        borderWidth: 1
     }
 });

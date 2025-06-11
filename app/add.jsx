@@ -156,6 +156,5 @@ const styles = StyleSheet.create({
     },
     tagSelected: {
         backgroundColor: '#C5EFCB',
-        borderColor: '#379683',
     },
 });

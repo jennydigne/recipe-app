@@ -12,7 +12,7 @@ export default function Layout() {
       />
       <Stack screenOptions={{
         headerStyle: {
-          backgroundColor: "#C5EFCB",
+          backgroundColor: "#F2F2F2",
         },
         headerTitleAlign: "center",
         headerBackButtonDisplayMode: "minimal",

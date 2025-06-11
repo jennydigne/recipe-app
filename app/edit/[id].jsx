@@ -179,7 +179,6 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     tagSelected: {
-        backgroundColor: '#C5EFCB',
-        borderColor: '#379683',
+        backgroundColor: '#D1EDD5',
     },
 });

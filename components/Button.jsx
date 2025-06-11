@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     color: '#222222',
   },
   delete: {
-    backgroundColor: '#F7C5D4',
+    backgroundColor: '#F5C2B5',
     borderColor: '#CF5B6C'
   },
   text_delete: {

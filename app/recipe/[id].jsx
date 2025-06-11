@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     tagInline: {
-        backgroundColor: '#C5EFCB',
+        backgroundColor: '#D1EDD5',
         paddingHorizontal: 8,
         paddingVertical: 4,
         borderRadius: 5,
