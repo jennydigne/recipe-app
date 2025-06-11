@@ -23,6 +23,7 @@ export default function Layout() {
           name="index"
           options={{
             headerTitle: "Recipe Manager",
+            headerBackVisible: false,
             headerTitleStyle: {
               fontSize: 20,
             }
@@ -39,6 +40,12 @@ export default function Layout() {
             headerBackVisible: false,
             headerRight: () => <CloseButton />
           })}
+        />
+        <Stack.Screen
+          name="edit/[id]"
+          options={{
+            headerTitle: "Edit recipe"
+          }}
         />
         <Stack.Screen
           name="recipes"

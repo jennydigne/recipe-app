@@ -3,13 +3,12 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { fetchAllRecipes } from '../firebaseRecipes';
-import Feather from '@expo/vector-icons/Feather';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [filtered, setFiltered] = useState([]);
-    const [sortOption, setSortOption] = useState("newest");
+    const [sortOption, setSortOption] = useState("a-z");
     const router = useRouter();
 
     useFocusEffect(
@@ -33,10 +32,10 @@ export default function Recipes() {
         const result = recipes.filter(recipe => {
             const titleMatch = recipe.title?.toLowerCase().includes(query);
             const ingredientsMatch = (recipe.ingredients || []).join(', ').toLowerCase().includes(query);
-            const categoryMatch = (recipe.category ?? '').toLowerCase().includes(query);
             const timeMatch = (recipe.cookingTime ?? '').toLowerCase().includes(query);
+            const tagMatch = (recipe.tags || []).join(', ').toLowerCase().includes(query);
 
-            return titleMatch || ingredientsMatch || timeMatch || categoryMatch;
+            return titleMatch || ingredientsMatch || timeMatch || tagMatch;
         });
 
         result.sort((a, b) => {
@@ -52,22 +51,24 @@ export default function Recipes() {
         <View style={styles.container}>
             <Text style={styles.label}>Search recipes</Text>
             <TextInput
-                placeholder="Title, ingredient, category or cooking time"
+                placeholder="Search by title, ingredient, tag or cooking time"
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 style={styles.input}
             />
+
             <Text style={styles.label}>Sort recipes</Text>
             <View style={styles.sortContainer}>
                 <Pressable style={[styles.sortButton, sortOption === "a-z" && styles.sortButtonSelected]}
                     onPress={() => setSortOption("a-z")}>
-                    <Text >A–Z</Text>
+                    <Text>A–Z</Text>
                 </Pressable>
                 <Pressable style={[styles.sortButton, sortOption === "z-a" && styles.sortButtonSelected]}
                     onPress={() => setSortOption("z-a")}>
                     <Text>Z–A</Text>
                 </Pressable>
             </View>
+
             <FlatList
                 data={filtered}
                 keyExtractor={item => item.id}
@@ -79,15 +80,13 @@ export default function Recipes() {
                         <Text style={styles.itemTitle}>{item.title}</Text>
                         <View style={styles.metaRow}>
                             <View style={styles.metaItem}>
-                                <Feather name="clock" size={16} color="gray" />
                                 <Text style={styles.itemInfo}>{item.cookingTime}</Text>
                             </View>
-                            {item.category && (
-                                <View style={styles.metaItem}>
-                                    <Feather name="tag" size={16} color="gray" />
-                                    <Text style={styles.itemInfo}>{item.category}</Text>
+                            {item.tags?.slice(0, 3).map(tag => (
+                                <View key={tag} style={styles.tagPreview}>
+                                    <Text style={styles.tagText}>{tag}</Text>
                                 </View>
-                            )}
+                            ))}
                         </View>
                     </Pressable>
                 )}
@@ -121,9 +120,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     itemInfo: {
-        fontSize: 14,
-        color: "gray",
-        marginLeft: 4
+        fontSize: 12,
     },
     emptyList: {
         marginTop: 20
@@ -134,9 +131,20 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     metaItem: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginRight: 10
+        paddingHorizontal: 6,
+        paddingVertical: 3,
+        backgroundColor: "#d0ecf5",
+        borderRadius: 5
+    },
+    tagPreview: {
+        backgroundColor: '#C5EFCB',
+        paddingHorizontal: 6,
+        paddingVertical: 3,
+        borderRadius: 5,
+        marginLeft: 6,
+    },
+    tagText: {
+        fontSize: 12,
     },
     label: {
         fontWeight: "bold",
@@ -145,7 +153,6 @@ const styles = StyleSheet.create({
     },
     sortContainer: {
         flexDirection: "row",
-        gap: 10,
         marginBottom: 16,
         flexWrap: "wrap"
     },
@@ -153,7 +160,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#F2F2F2",
         paddingVertical: 5,
         paddingHorizontal: 10,
-        borderRadius: 5
+        borderRadius: 5,
+        marginRight: 10
     },
     sortButtonSelected: {
         backgroundColor: "#C5EFCB",

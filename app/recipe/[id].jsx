@@ -3,7 +3,6 @@ import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
 import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import { fetchRecipeById, deleteRecipe } from '../../firebaseRecipes';
-import Feather from '@expo/vector-icons/Feather';
 
 export default function RecipeDetail() {
     const { id } = useLocalSearchParams();
@@ -56,21 +55,21 @@ export default function RecipeDetail() {
 
     return (
         <View style={styles.container}>
-            <ScrollView
-                contentContainerStyle={styles.content}>
+            <ScrollView contentContainerStyle={styles.content}>
                 <Text style={styles.title}>{recipe.title}</Text>
+
                 <View style={styles.metaRow}>
                     <View style={styles.metaItem}>
-                        <Feather name="clock" size={16} color="gray" />
                         <Text style={styles.metaText}>{recipe.cookingTime}</Text>
                     </View>
-                    {recipe.category && (
-                        <View style={styles.metaItem}>
-                            <Feather name="tag" size={16} color="gray" />
-                            <Text style={styles.metaText}>{recipe.category}</Text>
+
+                    {recipe.tags?.map((tag) => (
+                        <View key={tag} style={styles.tagInline}>
+                            <Text style={styles.tagText}>{tag}</Text>
                         </View>
-                    )}
+                    ))}
                 </View>
+
                 <Text style={styles.sectionTitle}>Ingredients</Text>
                 {recipe.ingredients.map((item, index) => (
                     <Text key={index} style={styles.item}>• {item}</Text>
@@ -81,9 +80,10 @@ export default function RecipeDetail() {
                     <Text key={index} style={styles.item}>{index + 1}. {item}</Text>
                 ))}
             </ScrollView>
+
             <View style={styles.buttonContainer}>
-                <Button title="Edit" variant="primary" onPress={() => router.push(`/edit/${id}`)} />
-                <Button title="Delete" variant="delete" style={styles.button} onPress={handleDelete} />
+                <Button title="Edit recipe" variant="primary" onPress={() => router.push(`/edit/${id}`)} />
+                <Button title="Delete recipe" variant="delete" style={styles.button} onPress={handleDelete} />
             </View>
         </View>
     );
@@ -123,18 +123,28 @@ const styles = StyleSheet.create({
     },
     metaRow: {
         flexDirection: 'row',
+        flexWrap: 'wrap',
         alignItems: 'center',
         marginBottom: 5,
     },
     metaItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginRight: 10
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        backgroundColor: "#d0ecf5",
+        borderRadius: 5,
+        marginRight: 6
     },
     metaText: {
-        fontSize: 14,
-        color: 'gray',
-        marginLeft: 4
-    }
+        fontSize: 12,
+    },
+    tagInline: {
+        backgroundColor: '#C5EFCB',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 5,
+        marginRight: 6
+    },
+    tagText: {
+        fontSize: 12,
+    },
 });
-

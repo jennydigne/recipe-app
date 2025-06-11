@@ -1,22 +1,21 @@
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const Dropdown = ({ options, selected, setSelected, isOpen, toggleOpen }) => {
+const Dropdown = ({ options, selected, setSelected }) => {
+    const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
 
     const handleSelect = (option) => {
         setSelected(option);
+        setIsOpen(false); 
     };
 
     return (
         <View style={styles.wrapper}>
             <TouchableOpacity
-                style={[
-                    styles.dropdown,
-                    isOpen ? styles.dropdownOpen : styles.dropdownClosed
-                ]}
-                onPress={toggleOpen}
+                style={[styles.dropdown, isOpen ? styles.dropdownOpen : styles.dropdownClosed]}
+                onPress={() => setIsOpen(prev => !prev)}
                 ref={dropdownRef}
             >
                 <View style={styles.dropdownContent}>
@@ -43,6 +42,7 @@ const Dropdown = ({ options, selected, setSelected, isOpen, toggleOpen }) => {
         </View>
     );
 };
+
 
 const styles = StyleSheet.create({
     wrapper: {
