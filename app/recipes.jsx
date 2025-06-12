@@ -49,7 +49,7 @@ export default function Recipes() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Search recipes</Text>
+            <Text style={styles.label}>Find a recipe</Text>
             <TextInput
                 placeholder="Search by title, ingredient, tag or cooking time"
                 value={searchQuery}
@@ -61,11 +61,11 @@ export default function Recipes() {
             <View style={styles.sortContainer}>
                 <Pressable style={[styles.sortButton, sortOption === "a-z" && styles.sortButtonSelected]}
                     onPress={() => setSortOption("a-z")}>
-                    <Text>A–Z</Text>
+                    <Text style={styles.sortButtonText}>A–Z</Text>
                 </Pressable>
                 <Pressable style={[styles.sortButton, sortOption === "z-a" && styles.sortButtonSelected]}
                     onPress={() => setSortOption("z-a")}>
-                    <Text>Z–A</Text>
+                    <Text style={styles.sortButtonText}>Z–A</Text>
                 </Pressable>
             </View>
 
@@ -157,13 +157,17 @@ const styles = StyleSheet.create({
         flexWrap: "wrap"
     },
     sortButton: {
-        backgroundColor: "#F2F2F2",
-        paddingVertical: 5,
-        paddingHorizontal: 10,
+        paddingVertical: 3,
+        paddingHorizontal: 6,
         borderRadius: 5,
-        marginRight: 10
+        marginRight: 10,
+        borderWidth: 1
     },
     sortButtonSelected: {
-        borderWidth: 1
+        borderWidth: 1,
+        backgroundColor: "#D1EDD5"
+    },
+    sortButtonText: {
+        fontSize: 12
     }
 });

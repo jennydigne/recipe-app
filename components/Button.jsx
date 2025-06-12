@@ -39,21 +39,21 @@ const styles = StyleSheet.create({
   },
   primary: {
     backgroundColor: '#C5EFCB',
-    borderColor: '#11A871'
+    borderColor: '#06402B'
   },
   text_primary: {
     color: '#06402B',
   },
   secondary: {
     backgroundColor: '#F2F2F2',
-    borderColor: '#8f8f8f',
+    borderColor: '#222222',
   },
   text_secondary: {
     color: '#222222',
   },
   delete: {
     backgroundColor: '#F5C2B5',
-    borderColor: '#CF5B6C'
+    borderColor: '#851D2D'
   },
   text_delete: {
     color: '#851D2D',
