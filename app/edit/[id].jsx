@@ -15,8 +15,8 @@ export default function EditRecipe() {
 
     const cookingTimeOptions = ['< 15 min', '< 30 min', '< 45 min', '< 60 min', '> 60 min'];
     const allTags = [
-        "Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Vegetarian", "Vegan",
-        "Seafood", "Meat", "Poultry"
+        "Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Side", 
+        "Vegetarian", "Vegan", "Seafood", "Meat", "Poultry"
     ];
 
     const router = useRouter();

@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
     sortButtonSelected: {
-        borderWidth: 1,
         backgroundColor: "#D1EDD5"
     },
     sortButtonText: {
