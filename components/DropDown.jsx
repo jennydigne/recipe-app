@@ -8,7 +8,7 @@ const Dropdown = ({ options, selected, setSelected }) => {
 
     const handleSelect = (option) => {
         setSelected(option);
-        setIsOpen(false); 
+        setIsOpen(false);
     };
 
     return (
@@ -31,10 +31,18 @@ const Dropdown = ({ options, selected, setSelected }) => {
                     {options.map((option, index) => (
                         <TouchableOpacity
                             key={index}
-                            style={styles.dropdownItem}
+                            style={[
+                                styles.dropdownItem,
+                                selected === option && styles.dropdownItemSelected
+                            ]}
                             onPress={() => handleSelect(option)}
                         >
-                            <Text style={styles.itemText}>{option}</Text>
+                            <View style={styles.itemRow}>
+                                <Text style={styles.itemText}>{option}</Text>
+                                {selected === option && (
+                                    <Feather name="check" size={16} color="black" />
+                                )}
+                            </View>
                         </TouchableOpacity>
                     ))}
                 </View>
@@ -94,6 +102,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    itemRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 });
 
