@@ -57,15 +57,14 @@ export default function RecipeDetail() {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.content}>
                 <Text style={styles.title}>{recipe.title}</Text>
-
                 <View style={styles.metaRow}>
-                    <View style={styles.metaItem}>
+                    <View style={[styles.metaItem, styles.cookingTimeItem]}>
                         <Text style={styles.metaText}>{recipe.cookingTime}</Text>
                     </View>
 
                     {recipe.tags?.map((tag) => (
-                        <View key={tag} style={styles.tagInline}>
-                            <Text style={styles.tagText}>{tag}</Text>
+                        <View key={tag} style={styles.metaItem}>
+                            <Text style={styles.metaText}>{tag}</Text>
                         </View>
                     ))}
                 </View>
@@ -128,23 +127,17 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     metaItem: {
-        paddingHorizontal: 8,
-        paddingVertical: 4,
-        backgroundColor: "#d0ecf5",
-        borderRadius: 5,
-        marginRight: 6
-    },
-    metaText: {
-        fontSize: 12,
-    },
-    tagInline: {
         backgroundColor: '#D1EDD5',
         paddingHorizontal: 8,
         paddingVertical: 4,
         borderRadius: 5,
-        marginRight: 6
+        marginRight: 5,
+        marginBottom: 5
     },
-    tagText: {
+    metaText: {
         fontSize: 12,
+    },
+    cookingTimeItem: {
+        backgroundColor: '#D0ECF5',
     },
 });

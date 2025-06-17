@@ -80,11 +80,11 @@ export default function Recipes() {
                         <Text style={styles.itemTitle}>{item.title}</Text>
                         <View style={styles.metaRow}>
                             <View style={styles.metaItem}>
-                                <Text style={styles.itemInfo}>{item.cookingTime}</Text>
+                                <Text style={styles.metaText}>{item.cookingTime}</Text>
                             </View>
                             {item.tags?.slice(0, 3).map(tag => (
-                                <View key={tag} style={styles.tagPreview}>
-                                    <Text style={styles.tagText}>{tag}</Text>
+                                <View key={tag} style={[styles.metaItem, styles.tagItem]}>
+                                    <Text style={styles.metaText}>{tag}</Text>
                                 </View>
                             ))}
                         </View>
@@ -119,9 +119,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: "bold",
     },
-    itemInfo: {
-        fontSize: 12,
-    },
     emptyList: {
         marginTop: 20
     },
@@ -133,17 +130,14 @@ const styles = StyleSheet.create({
     metaItem: {
         paddingHorizontal: 6,
         paddingVertical: 3,
-        backgroundColor: "#d0ecf5",
+        backgroundColor: "#D0ECF5",
         borderRadius: 5
     },
-    tagPreview: {
+    tagItem: {
         backgroundColor: '#D1EDD5',
-        paddingHorizontal: 6,
-        paddingVertical: 3,
-        borderRadius: 5,
-        marginLeft: 6,
+        marginLeft: 6
     },
-    tagText: {
+    metaText: {
         fontSize: 12,
     },
     label: {
@@ -161,7 +155,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 6,
         borderRadius: 5,
         marginRight: 10,
-        borderWidth: 1
+        borderWidth: 1,
+        borderColor: "gray"
     },
     sortButtonSelected: {
         backgroundColor: "#D1EDD5"

@@ -150,11 +150,11 @@ const styles = StyleSheet.create({
         paddingVertical: 6,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: '#ccc',
+        borderColor: 'gray',
         marginRight: 8,
         marginBottom: 8,
     },
     tagSelected: {
-        backgroundColor: '#C5EFCB',
+        backgroundColor: '#D1EDD5',
     },
 });
