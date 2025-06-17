@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
     },
     item: {
         fontSize: 16,
-        marginBottom: 4
+        marginBottom: 4,
+        lineHeight: 22
     },
     buttonContainer: {
         padding: 20,

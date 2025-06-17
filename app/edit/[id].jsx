@@ -152,7 +152,8 @@ const styles = StyleSheet.create({
     },
     multilineInput: {
         height: 100,
-        textAlignVertical: "top"
+        textAlignVertical: "top",
+        lineHeight: 20
     },
     buttonContainer: {
         marginTop: 20,
