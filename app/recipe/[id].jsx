@@ -101,33 +101,33 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
         fontWeight: "bold",
-        marginBottom: 10,
+        marginBottom: 10
     },
     sectionTitle: {
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 16,
-        marginBottom: 8,
+        marginBottom: 8
     },
     item: {
         fontSize: 16,
-        marginBottom: 4,
+        marginBottom: 4
     },
     buttonContainer: {
         padding: 20,
-        flexDirection: "row",
+        flexDirection: "row"
     },
     button: {
         marginLeft: 15
     },
     metaRow: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        marginBottom: 5,
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        marginBottom: 5
     },
     metaItem: {
-        backgroundColor: '#D1EDD5',
+        backgroundColor: "#D1EDD5",
         paddingHorizontal: 8,
         paddingVertical: 4,
         borderRadius: 5,
@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
         marginBottom: 5
     },
     metaText: {
-        fontSize: 12,
+        fontSize: 12
     },
     cookingTimeItem: {
-        backgroundColor: '#D0ECF5',
-    },
+        backgroundColor: "#D0ECF5"
+    }
 });

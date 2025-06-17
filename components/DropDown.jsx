@@ -20,9 +20,9 @@ const Dropdown = ({ options, selected, setSelected }) => {
             >
                 <View style={styles.dropdownContent}>
                     <Text style={styles.dropdownText}>
-                        {selected ? selected : 'Select an option'}
+                        {selected ? selected : "Select an option"}
                     </Text>
-                    <Feather name={isOpen ? 'chevron-up' : 'chevron-down'} size={20} color="#333" />
+                    <Feather name={isOpen ? "chevron-up" : "chevron-down"} size={20} color="#333" />
                 </View>
             </TouchableOpacity>
 
@@ -40,7 +40,7 @@ const Dropdown = ({ options, selected, setSelected }) => {
                             <View style={styles.itemRow}>
                                 <Text style={styles.itemText}>{option}</Text>
                                 {selected === option && (
-                                    <Feather name="check" size={16} color="black" />
+                                    <Feather name="check" size={18} color="#333" />
                                 )}
                             </View>
                         </TouchableOpacity>
@@ -54,28 +54,28 @@ const Dropdown = ({ options, selected, setSelected }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        position: 'relative',
+        position: "relative",
     },
     dropdown: {
         height: 40,
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: "gray",
         borderRadius: 5,
-        justifyContent: 'center',
+        justifyContent: "center",
         paddingHorizontal: 10,
-        backgroundColor: 'white',
+        backgroundColor: "white",
     },
     dropdownText: {
         fontSize: 14,
-        color: '#333',
+        color: "#333",
     },
     dropdownList: {
-        position: 'absolute',
+        position: "absolute",
         top: 40,
-        width: '100%',
-        backgroundColor: 'white',
+        width: "100%",
+        backgroundColor: "white",
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: "gray",
         borderBottomLeftRadius: 5,
         borderBottomRightRadius: 5,
         maxHeight: 210,
@@ -99,15 +99,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0,
     },
     dropdownContent: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     },
     itemRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+    }
 });
 
 export default Dropdown;

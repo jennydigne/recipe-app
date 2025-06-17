@@ -6,7 +6,7 @@ import { fetchAllRecipes } from '../firebaseRecipes';
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
     const [filtered, setFiltered] = useState([]);
     const [sortOption, setSortOption] = useState("a-z");
     const router = useRouter();
@@ -100,24 +100,24 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         flex: 1,
-        backgroundColor: "white",
+        backgroundColor: "white"
     },
     input: {
         borderWidth: 1,
         borderColor: "gray",
         borderRadius: 6,
         padding: 10,
-        marginBottom: 16,
+        marginBottom: 16
     },
     item: {
         padding: 12,
         backgroundColor: "#F2F2F2",
         borderRadius: 6,
-        marginBottom: 10,
+        marginBottom: 10
     },
     itemTitle: {
         fontSize: 16,
-        fontWeight: "bold",
+        fontWeight: "bold"
     },
     emptyList: {
         marginTop: 20
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     metaRow: {
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 10,
+        marginTop: 10
     },
     metaItem: {
         paddingHorizontal: 6,
@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
         borderRadius: 5
     },
     tagItem: {
-        backgroundColor: '#D1EDD5',
+        backgroundColor: "#D1EDD5",
         marginLeft: 6
     },
     metaText: {
-        fontSize: 12,
+        fontSize: 12
     },
     label: {
         fontWeight: "bold",

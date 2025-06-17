@@ -30,33 +30,33 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     borderWidth: 1,
   },
   textBase: {
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 16
   },
   primary: {
-    backgroundColor: '#C5EFCB',
-    borderColor: '#06402B'
+    backgroundColor: "#C5EFCB",
+    borderColor: "#06402B"
   },
   text_primary: {
-    color: '#06402B',
+    color: "#06402B",
   },
   secondary: {
-    backgroundColor: '#F2F2F2',
-    borderColor: '#222222',
+    backgroundColor: "#F2F2F2",
+    borderColor: "#222222",
   },
   text_secondary: {
-    color: '#222222',
+    color: "#222222",
   },
   delete: {
-    backgroundColor: '#F5C2B5',
-    borderColor: '#851D2D'
+    backgroundColor: "#F5C2B5",
+    borderColor: "#851D2D"
   },
   text_delete: {
-    color: '#851D2D',
+    color: "#851D2D",
   },
 });
 

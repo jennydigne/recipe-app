@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         paddingHorizontal: 20,
         paddingTop: 100,
-        alignItems: "center",
+        alignItems: "center"
     },
     heading: {
         fontSize: 28,
         fontWeight: "bold",
         marginBottom: 20,
-        textAlign: "center",
+        textAlign: "center"
     },
     subHeading: {
         fontSize: 18,
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "center"
     },
     button: {
         marginLeft: 15

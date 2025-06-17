@@ -13,9 +13,9 @@ export default function EditRecipe() {
     const [cookingTime, setCookingTime] = useState(null);
     const [tags, setTags] = useState([]);
 
-    const cookingTimeOptions = ['< 15 min', '< 30 min', '< 45 min', '< 60 min', '> 60 min'];
+    const cookingTimeOptions = ["< 15 min", "< 30 min", "< 45 min", "< 60 min", "> 60 min"];
     const allTags = [
-        "Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Side", 
+        "Breakfast", "Lunch", "Dinner", "Snack", "Dessert", "Side",
         "Vegetarian", "Vegan", "Seafood", "Meat", "Poultry"
     ];
 
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "gray",
         padding: 10,
-        borderRadius: 5,
+        borderRadius: 5
     },
     multilineInput: {
         height: 100,
@@ -160,25 +160,25 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         padding: 20,
-        paddingBottom: 40,
+        paddingBottom: 40
     },
     scrollView: {
         backgroundColor: "white"
     },
     tagContainer: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
+        flexDirection: "row",
+        flexWrap: "wrap"
     },
     tag: {
         paddingHorizontal: 10,
         paddingVertical: 6,
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: 'gray',
+        borderColor: "gray",
         marginRight: 8,
-        marginBottom: 8,
+        marginBottom: 8
     },
     tagSelected: {
-        backgroundColor: '#D1EDD5',
-    },
+        backgroundColor: "#D1EDD5"
+    }
 });
